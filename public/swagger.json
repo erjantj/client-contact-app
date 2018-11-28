@@ -1,0 +1,225 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Client contact app",
+        "description": "Client contact app",
+        "contact": {
+            "email": "yerzhan.torgayev@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "basePath": "/api/v1",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/client": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "List of all clients",
+                "description": "Return list of all clients available",
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "List of all clients"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Create client",
+                "description": "Create client",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Client created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/client/{id}": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Get client",
+                "description": "Get client",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Get client"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Update client",
+                "description": "Update client",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Client updated"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Delete client",
+                "description": "Delete client",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Client deleted"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Client": {
+            "properties": {
+                "first_name": {
+                    "description": "First name",
+                    "type": "string",
+                    "default": ""
+                },
+                "last_name": {
+                    "description": "Last name",
+                    "type": "string",
+                    "default": ""
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string",
+                    "default": ""
+                }
+            }
+        },
+        "ClientContact": {
+            "properties": {
+                "address": {
+                    "description": "Address",
+                    "type": "string",
+                    "default": ""
+                },
+                "postcode": {
+                    "description": "Postcode",
+                    "type": "string",
+                    "default": ""
+                }
+            }
+        }
+    },
+    "responses": {
+        "UnprocessableEntity": {
+            "description": "Unprocessable Entity"
+        },
+        "Forbidden": {
+            "description": "Forbidden"
+        },
+        "RecordNotFound": {
+            "description": "Record Not Found"
+        }
+    },
+    "securityDefinitions": {
+        "apiKey": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
