@@ -42,11 +42,7 @@ class ClientTest extends TestCase
         $result = $this->get("/api/{$this->apiVersion}/{$this->endpoint}/", $this->getHeaders($token->token));
         $content = json_decode($result->response->getContent(), true);
 
-        if (isset($content['data'])) {
-            $this->assertTrue(count($content['data']) >= $clientsCount);
-        } else {
-            $this->assertTrue(false);
-        }
+        $this->assertTrue(count($content) >= $clientsCount);
     }
 
     /**
