@@ -25,6 +25,8 @@ class TokenGenerate extends Command
         $clientId = $this->argument('clientId');
 
         $client = Client::findOrFail($clientId);
-        $this->tokenService->generateTokenForClient($client);
+        $token = $this->tokenService->generateTokenForClient($client);
+
+        echo "Use this admin token to authorize: {$token}";
     }
 }
