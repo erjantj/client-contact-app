@@ -24,7 +24,7 @@ PHP >= 5.6
     composer start
     ```
 
-3.  Client side availabe here [http://localhost:8000/client/](http://localhost:8000/client/).
+3.  Client side availabe here [http://localhost:8000/client/index.html](http://localhost:8000/client/index.html).
 
 4.  Generate access token for admin user by running:
 

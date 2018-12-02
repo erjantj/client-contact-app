@@ -12,11 +12,11 @@ class ClientService
 
     /**
      * Clients list
-     * @return Paginator
+     * @return Collection
      */
     public function all()
     {
-        return Client::paginate(self::PAGE_SIZE);
+        return Client::with('contacts')->get();
     }
 
     /**
@@ -104,7 +104,19 @@ class ClientService
         }
 
         if ($clientsForInsert) {
-            Client::insert($clientsForInsert);
+            DB::beginTransaction();
+            try {
+                $clientsForInsert = array_chunk($clientsForInsert, 10);
+
+                foreach ($clientsForInsert as $chunk) {
+                    Client::insert($chunk);
+                }
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
         }
 
         return true;

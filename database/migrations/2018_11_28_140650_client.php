@@ -38,5 +38,12 @@ class Client extends Migration
             'last_name' => 'admin',
             'email' => 'admin@example.com',
         ]);
+
+        \App\Models\Client::create([
+            'id' => 2,
+            'first_name' => 'client',
+            'last_name' => 'client',
+            'email' => 'client@example.com',
+        ]);
     }
 }

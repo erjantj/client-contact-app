@@ -30,5 +30,12 @@ class Tokens extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        \App\Models\Token::create([
+            'id' => 1,
+            'token' => 'c5aa7a2367eba62037bc9515ebc579002f57e4fc',
+            'client_id' => 2,
+        ]);
+
     }
 }

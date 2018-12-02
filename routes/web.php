@@ -22,10 +22,10 @@ $router->group([
     // Client
     $router->get('/client', 'ClientController@all');
     $router->post('/client', 'ClientController@create');
+    $router->post('/client/import', 'ClientController@import');
     $router->get('/client/{id}', 'ClientController@get');
     $router->post('/client/{id}', 'ClientController@update');
     $router->delete('/client/{id}', 'ClientController@delete');
-    $router->post('/client/import', 'ClientController@import');
 
     // Client contacts
     $router->get('/client-contact', 'ClientContactController@all');

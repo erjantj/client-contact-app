@@ -26,6 +26,8 @@ class TokenService
         $tokenRecord->token = $token;
         $tokenRecord->client_id = $client->id;
 
+        $tokenRecord->save();
+
         return $token;
     }
 }
