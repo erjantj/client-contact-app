@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ClientContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * @SWG\Get(
      *     path="/client-contact",

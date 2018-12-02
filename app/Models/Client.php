@@ -11,6 +11,8 @@ class Client extends Model
 
     const CONTACTS_LIMIT = 5;
 
+    const FILE_PATH = 'client';
+
     /**
      * The attributes that are mass assignable.
      *

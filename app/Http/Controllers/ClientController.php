@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Rules\FileExtentionIn;
 use App\Services\ClientService;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * @SWG\Get(
      *     path="/client",
@@ -166,6 +174,50 @@ class ClientController extends Controller
 
     /**
      * @SWG\Post(
+     *     path="/client/import",
+     *     tags={"Client"},
+     *     summary="Import clients",
+     *     description="Import clients",
+     *     consumes={"application/json"},
+     *     @SWG\Parameter(
+     *         name="file",
+     *         in="formData",
+     *         required=true,
+     *         description="File",
+     *         type="file",
+     *     ),
+     *     @SWG\Response(
+     *         response="default",
+     *         description="Clients imported",
+     *     ),
+     *     @SWG\Response(
+     *         response=403,
+     *         description="Forbidden",
+     *     ),
+     * )
+     *
+     * Import clients
+     *
+     * @param  Request  $request request
+     * @return string   json response
+     */
+    public function import(Request $request, ClientService $clientService, FileService $fileService)
+    {
+        $this->validateImport($request);
+
+        $file = $request->file('file');
+
+        if ($fileData = $fileService->import($file)) {
+            if ($clientService->saveFileData($fileData)) {
+                return response()->json();
+            }
+        }
+
+        abort(400, 'Problem updating client');
+    }
+
+    /**
+     * @SWG\Post(
      *     path="/client/{id}",
      *     tags={"Client"},
      *     summary="Update client",
@@ -231,6 +283,13 @@ class ClientController extends Controller
             'first_name' => 'required|max:255|string',
             'last_name' => 'required|max:255|string',
             'email' => 'required|max:255|email|unique:client,email',
+        ]);
+    }
+
+    private function validateImport($request)
+    {
+        $this->validate($request, [
+            'file' => ['required', 'file', new FileExtentionIn(['csv'])],
         ]);
     }
 

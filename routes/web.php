@@ -25,6 +25,7 @@ $router->group([
     $router->get('/client/{id}', 'ClientController@get');
     $router->post('/client/{id}', 'ClientController@update');
     $router->delete('/client/{id}', 'ClientController@delete');
+    $router->post('/client/import', 'ClientController@import');
 
     // Client contacts
     $router->get('/client-contact', 'ClientContactController@all');

@@ -26,10 +26,17 @@ class Client extends Migration
         Schema::create('client', function (Blueprint $table) {
             $table->increments('id');
             $table->string('first_name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('email');
             $table->timestamps();
             $table->softDeletes();
         });
+
+        \App\Models\Client::create([
+            'id' => 1,
+            'first_name' => 'admin',
+            'last_name' => 'admin',
+            'email' => 'admin@example.com',
+        ]);
     }
 }

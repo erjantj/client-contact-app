@@ -13,6 +13,223 @@
         "http"
     ],
     "paths": {
+        "/client-contact": {
+            "get": {
+                "tags": [
+                    "Client contact"
+                ],
+                "summary": "List of all client contacts",
+                "description": "Return list of all client contacts available",
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "List of all client contacts"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/client/{clientId}/contact": {
+            "get": {
+                "tags": [
+                    "Client contact"
+                ],
+                "summary": "List of given client contacts",
+                "description": "Return list of given client contacts available",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "clientId",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "List of given client contacts"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Client contact"
+                ],
+                "summary": "Create client contact",
+                "description": "Create client contact",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "clientId",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClientContact"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Client created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/client/{clientId}/contact/{id}": {
+            "get": {
+                "tags": [
+                    "Client contact"
+                ],
+                "summary": "Get client contact",
+                "description": "Get client contact",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Client id",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Get client contact"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Client contact"
+                ],
+                "summary": "Update client contact",
+                "description": "Update client contact",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "clientId",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Client contact id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClientContact"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Client updated"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Delete client",
+                "description": "Delete client",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "clientId",
+                        "in": "path",
+                        "description": "Client id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Client contact id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Client deleted"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/client": {
             "get": {
                 "tags": [
@@ -161,6 +378,35 @@
                 "responses": {
                     "default": {
                         "description": "Client deleted"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/client/import": {
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Import clients",
+                "description": "Import clients",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "File",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Clients imported"
                     },
                     "403": {
                         "description": "Forbidden"
